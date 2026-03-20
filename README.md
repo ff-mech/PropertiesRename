@@ -8,6 +8,7 @@
 ![Platform](https://img.shields.io/badge/Platform-SOLIDWORKS-red?style=flat-square)
 ![Type](https://img.shields.io/badge/Type-Macro-green?style=flat-square)
 ![Maintained](https://img.shields.io/badge/Maintained-Yes-brightgreen?style=flat-square)
+![License](https://img.shields.io/badge/License-MIT-yellow?style=flat-square)
 
 *Scans an entire folder of SOLIDWORKS files and silently updates custom properties and revision tables — no manual file-by-file editing required.*
 
@@ -24,6 +25,7 @@
 - [Requirements](#requirements)
 - [Log File](#log-file)
 - [Behavior & Edge Cases](#behavior--edge-cases)
+- [License](#license)
 - [Latest Release](https://github.com/ff-mech/PropertiesRename/releases/latest)
 
 ---
@@ -110,3 +112,9 @@ A log named `DrawnBy_Update_Log.txt` is written to the target folder at the end 
 - **Existing revision rows** — If a drawing already has a revision table, all existing revision rows are cleared before Rev A is added.
 - **Midnight rollover** — Elapsed time calculation handles runs that cross midnight correctly.
 
+
+---
+
+## License
+
+Released under the [MIT License](LICENSE).

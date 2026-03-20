@@ -33,7 +33,7 @@ Function ShowInputDialog(ByRef targetFolder    As String, _
     Dim htaPath    As String
     Dim resultPath As String
     htaPath    = Environ("TEMP") & "\SW_BatchUpdate.hta"
-    resultPath = Environ("TEMP") ;& "\SW_BatchUpdate_result.txt"
+    resultPath = Environ("TEMP") & "\SW_BatchUpdate_result.txt"
 
     ' Remove any leftover result file from a previous run
     On Error Resume Next
@@ -271,7 +271,7 @@ Sub main()
             ReDim Preserve jNames(1 To jobCount)
             ReDim Preserve jTypes(1 To jobCount)
             ReDim Preserve jIsDrw(1 To jobCount)
-            jPaths(jobCount) = targetFolder ;& fName
+            jPaths(jobCount) = targetFolder & fName
             jNames(jobCount) = fName
             jTypes(jobCount) = dt
             jIsDrw(jobCount) = isDrw
@@ -400,7 +400,7 @@ SkipFile:
             If partLog <> "" Then debugLog = debugLog & partLog
 
             If Not enfResult Then
-                failLog     = failLog     ;& "FAIL - Property enforcement failed: " ;& fileName ;& vbCrLf ;& partLog
+                failLog     = failLog     & "FAIL - Property enforcement failed: " & fileName & vbCrLf & partLog
                 failedCount = failedCount + 1
                 swApp.CloseDoc swModel.GetTitle
                 GoTo NextJob
@@ -408,11 +408,11 @@ SkipFile:
 
             Dim revResult As Boolean
             revResult = UpdateDrawingRevisionTable(swModel, fileName, partLog, didChange)
-            debugLog  = debugLog ;& "  UpdateDrawingRevisionTable = " ;& revResult ;& vbCrLf
-            If partLog <> "" Then debugLog = debugLog ;& partLog
+            debugLog  = debugLog & "  UpdateDrawingRevisionTable = " & revResult & vbCrLf
+            If partLog <> "" Then debugLog = debugLog & partLog
 
             If Not revResult Then
-                failLog     = failLog     ;& "FAIL - Revision table update failed: " ;& fileName ;& vbCrLf ;& partLog
+                failLog     = failLog     & "FAIL - Revision table update failed: " & fileName & vbCrLf & partLog
                 failedCount = failedCount + 1
                 swApp.CloseDoc swModel.GetTitle
                 GoTo NextJob
@@ -442,30 +442,30 @@ SkipFile:
             swModel.SetSaveFlag
             Call swModel.Save3(swSaveAsOptions_Silent, saveErrors, saveWarnings)
 
-            debugLog = debugLog ;& "  Save3: errors=" ;& saveErrors ;& ", warnings=" ;& saveWarnings ;& vbCrLf
+            debugLog = debugLog & "  Save3: errors=" & saveErrors & ", warnings=" & saveWarnings & vbCrLf
 
             If saveErrors <> 0 Then
-                failLog     = failLog     ;& "FAIL - Could not save: " ;& fileName ;& " (save error: " ;& saveErrors ;& ")" ;& vbCrLf
+                failLog     = failLog     & "FAIL - Could not save: " & fileName & " (save error: " & saveErrors & ")" & vbCrLf
                 failedCount = failedCount + 1
                 swApp.CloseDoc swModel.GetTitle
                 GoTo NextJob
             End If
 
-            updateLog = updateLog ;& "UPDATED - " ;& fileName
+            updateLog = updateLog & "UPDATED - " & fileName
             If isDrawing Then
-                updateLog = updateLog ;& " | 15 properties enforced | DwgDrawnBy=" ;& drawingInitials ;& _
+                updateLog = updateLog & " | 15 properties enforced | DwgDrawnBy=" & drawingInitials & _
                                         " | Revision=A | Description=INITIAL RELEASE"
             Else
-                updateLog = updateLog ;& " | DrawnBy=" ;& modelInitials
+                updateLog = updateLog & " | DrawnBy=" & modelInitials
             End If
-            updateLog    = updateLog    ;& vbCrLf
+            updateLog    = updateLog    & vbCrLf
             updatedCount = updatedCount + 1
-            debugLog     = debugLog     ;& "  -> UPDATED" ;& vbCrLf
+            debugLog     = debugLog     & "  -> UPDATED" & vbCrLf
 
         Else
-            skipLog      = skipLog      ;& "SKIP - No change needed: " ;& fileName ;& vbCrLf
+            skipLog      = skipLog      & "SKIP - No change needed: " & fileName & vbCrLf
             skippedCount = skippedCount + 1
-            debugLog     = debugLog     ;& "  -> Skipped (no change)" ;& vbCrLf
+            debugLog     = debugLog     & "  -> Skipped (no change)" & vbCrLf
         End If
 
         swApp.CloseDoc swModel.GetTitle
@@ -616,7 +616,7 @@ Function EnforceDrawingProperties(ByVal swModel         As SldWorks.ModelDoc2, _
     Set swCustPropMgr = swModel.Extension.CustomPropertyManager("")
 
     If swCustPropMgr Is Nothing Then
-        partLog = partLog ;& "  Could not get CustomPropertyManager." ;& vbCrLf
+        partLog = partLog & "  Could not get CustomPropertyManager." & vbCrLf
         EnforceDrawingProperties = False
         Exit Function
     End If
@@ -735,7 +735,7 @@ Function GetDrawingPropertyName(ByVal idx As Long) As String
         Case 12 : GetDrawingPropertyName = "Tol X.X"
         Case 13 : GetDrawingPropertyName = "Tol X.XX"
         Case 14 : GetDrawingPropertyName = "Tol X.XXX"
-        Case 15 : GetDrawingPropertyName = Chr$(84) ;& Chr$(111) ;& Chr$(108) ;& Chr$(32) ;& Chr$(176)  ' "Tol ?"
+        Case 15 : GetDrawingPropertyName = Chr$(84) & Chr$(111) & Chr$(108) & Chr$(32) & Chr$(176)  ' "Tol ?"
         Case Else : GetDrawingPropertyName = ""
     End Select
 End Function
