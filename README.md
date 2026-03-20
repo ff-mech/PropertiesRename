@@ -24,6 +24,7 @@
 - [Requirements](#requirements)
 - [Log File](#log-file)
 - [Behavior & Edge Cases](#behavior--edge-cases)
+- [Latest Release](https://github.com/ff-mech/PropertiesRename/releases/latest)
 
 ---
 
@@ -50,7 +51,7 @@ PropertiesRename eliminates the tedious task of manually updating `DrawnBy`, `Dw
 ## How to Use
 
 **Step 1** — Open SOLIDWORKS and run the macro:
-> **Tools → Macros → Run** → select `PropertiesRename.vb`
+> **Tools → Macros → Run** → select `PropertiesRename.swp`
 
 **Step 2** — Fill in the dialog and click **Run**.
 
